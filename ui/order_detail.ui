@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OrderDetail</class>
+ <widget class="QWidget" name="OrderDetail">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string>
+    QMainWindow {
+      background-color: #f0f2f5;
+    }
+    QLabel#title {
+      font-size: 28px;
+      color: #1a73e8;
+      padding: 20px;
+      font-weight: bold;
+      background: white;
+      border-bottom: 1px solid #dadce0;
+    }
+    QGroupBox {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      margin: 20px;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #1a2035;
+    }
+    QGroupBox::title {
+      subcontrol-origin: margin;
+      left: 10px;
+      padding: 0 5px;
+    }
+    QLabel {
+      color: #5f6368;
+      font-size: 14px;
+    }
+    QPushButton {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    QPushButton:hover {
+      background-color: #1557b0;
+    }
+    QPushButton#back_btn {
+      background-color: #5f6368;
+    }
+    QPushButton#back_btn:hover {
+      background-color: #494c50;
+    }
+    QPushButton#refresh_btn {
+      background-color: #34a853;
+    }
+    QPushButton#refresh_btn:hover {
+      background-color: #2d8544;
+    }
+    QTableWidget {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      margin: 20px;
+      gridline-color: #f1f3f4;
+    }
+    QHeaderView::section {
+      background-color: #f8f9fa;
+      padding: 12px;
+      border: none;
+      border-bottom: 2px solid #dadce0;
+      font-weight: bold;
+      font-size: 14px;
+      color: #202124;
+    }
+    QTableWidget::item {
+      padding: 12px;
+      border-bottom: 1px solid #f1f3f4;
+    }
+    QTableWidget::item:selected {
+      background-color: #e8f0fe;
+      color: #1a73e8;
+    }
+    QLabel#status_label {
+      color: #5f6368;
+      font-size: 14px;
+      margin: 10px 20px;
+    }
+    QWidget#bottom_widget {
+      background: white;
+      border-top: 1px solid #dadce0;
+      padding: 10px;
+    }
+    
+    QLabel#page_label {
+      color: #5f6368;
+      font-weight: bold;
+    }
+    
+    QPushButton {
+      min-width: 60px;
+    }
+    
+    QComboBox {
+      min-width: 80px;
+      padding: 11px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #f8f9fa;
+    }
+    QComboBox:hover {
+      background: white;
+      border: 1px solid #1a73e8;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="content_layout">
+   <!-- Header -->
+   <item>
+    <layout class="QHBoxLayout" name="header_layout">
+     <item>
+      <widget class="QLabel" name="title">
+       <property name="text">
+        <string>Chi tiết đơn hàng</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="back_btn">
+       <property name="text">
+        <string>Quay lại</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   
+   <!-- Order Info -->
+   <item>
+    <widget class="QGroupBox" name="order_info_group">
+     <property name="title">
+      <string>Thông tin đơn hàng</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="order_id_label">
+        <property name="text">
+         <string>Mã đơn hàng:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="order_date_label">
+        <property name="text">
+         <string>Ngày đặt:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="customer_name_label">
+        <property name="text">
+         <string>Khách hàng:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="status_label">
+        <property name="text">
+         <string>Trạng thái:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="total_amount_label">
+        <property name="text">
+         <string>Tổng tiền:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="note_label">
+        <property name="text">
+         <string>Ghi chú:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   
+   <!-- Order Items -->
+   <item>
+    <widget class="QGroupBox" name="order_items_group">
+     <property name="title">
+      <string>Danh sách sản phẩm</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QTableWidget" name="items_table">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid">
+         <bool>true</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::SolidLine</enum>
+        </property>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ 
+ <resources/>
+</ui> 
