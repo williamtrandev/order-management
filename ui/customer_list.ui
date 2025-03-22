@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CustomerList</class>
+ <widget class="QMainWindow" name="CustomerList">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Danh sách người dùng</string>
+  </property>
+  <property name="styleSheet">
+   <string>
+    QMainWindow {
+      background-color: #f0f2f5;
+    }
+    QLabel#title {
+      font-size: 28px;
+      color: #1a73e8;
+      padding: 20px;
+      font-weight: bold;
+      background: white;
+      border-bottom: 1px solid #dadce0;
+    }
+    QWidget#search_widget {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      margin: 20px;
+      padding: 15px;
+    }
+    QLineEdit#search_input {
+      padding: 12px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #f8f9fa;
+      min-width: 300px;
+    }
+    QLineEdit#search_input:focus {
+      border: 2px solid #1a73e8;
+      background: white;
+    }
+    QComboBox {
+      padding: 11px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #f8f9fa;
+      min-width: 150px;
+    }
+    QComboBox:hover {
+      background: white;
+      border: 1px solid #1a73e8;
+    }
+    QPushButton {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    QPushButton:hover {
+      background-color: #1557b0;
+    }
+    QPushButton#back_btn {
+      background-color: #5f6368;
+    }
+    QPushButton#back_btn:hover {
+      background-color: #494c50;
+    }
+    QPushButton#refresh_btn {
+      background-color: #34a853;
+    }
+    QPushButton#refresh_btn:hover {
+      background-color: #2d8544;
+    }
+    QTableWidget {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      margin: 20px;
+      gridline-color: #f1f3f4;
+    }
+    QHeaderView::section {
+      background-color: #f8f9fa;
+      padding: 12px;
+      border: none;
+      border-bottom: 2px solid #dadce0;
+      font-weight: bold;
+      font-size: 14px;
+      color: #202124;
+    }
+    QTableWidget::item {
+      padding: 12px;
+      border-bottom: 1px solid #f1f3f4;
+    }
+    QTableWidget::item:selected {
+      background-color: #e8f0fe;
+      color: #1a73e8;
+    }
+    QLabel#status_label {
+      color: #5f6368;
+      font-size: 14px;
+      margin: 10px 20px;
+    }
+    QWidget#bottom_widget {
+      background: white;
+      border-top: 1px solid #dadce0;
+      padding: 10px;
+    }
+    
+    QLabel#page_label {
+      color: #5f6368;
+      font-weight: bold;
+    }
+    
+    QPushButton {
+      min-width: 60px;
+    }
+    
+    QComboBox {
+      min-width: 80px;
+    }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="title">
+      <property name="text">
+       <string>Danh sách người dùng</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="search_widget">
+      <layout class="QHBoxLayout" name="search_layout">
+       <item>
+        <widget class="QLineEdit" name="search_input">
+         <property name="placeholderText">
+          <string>Tìm kiếm người dùng...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="search_by_combo"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="sort_order_combo"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="refresh_btn">
+         <property name="text">
+          <string>Làm mới</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>icons/refresh.png</normaloff>
+          </iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="customers_table">
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="showGrid">
+       <bool>true</bool>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::SolidLine</enum>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="bottom_widget">
+      <layout class="QHBoxLayout" name="bottom_container">
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <property name="bottomMargin">
+        <number>20</number>
+       </property>
+       
+       <!-- Left side: Status -->
+       <item>
+        <widget class="QLabel" name="status_label">
+         <property name="text">
+          <string>Tổng số: 0 người dùng</string>
+         </property>
+        </widget>
+       </item>
+       
+       <!-- Center: Pagination -->
+       <item>
+        <layout class="QHBoxLayout" name="pagination_layout">
+         <item>
+          <widget class="QComboBox" name="page_size_combo">
+           <property name="minimumWidth">
+            <number>80</number>
+           </property>
+           <property name="maximumWidth">
+            <number>80</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="items_per_page_label">
+           <property name="text">
+            <string>dòng/trang</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="first_page_btn">
+           <property name="maximumWidth">
+            <number>60</number>
+           </property>
+           <property name="text">
+            <string>Đầu</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="prev_page_btn">
+           <property name="maximumWidth">
+            <number>60</number>
+           </property>
+           <property name="text">
+            <string>Trước</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="page_label">
+           <property name="minimumWidth">
+            <number>100</number>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="next_page_btn">
+           <property name="maximumWidth">
+            <number>60</number>
+           </property>
+           <property name="text">
+            <string>Sau</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="last_page_btn">
+           <property name="maximumWidth">
+            <number>60</number>
+           </property>
+           <property name="text">
+            <string>Cuối</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       
+       <!-- Right side: Back button -->
+       <item>
+        <widget class="QPushButton" name="back_btn">
+         <property name="maximumWidth">
+          <number>100</number>
+         </property>
+         <property name="text">
+          <string>Quay lại</string>
+         </property>
+        </widget>
+       </item>
+       
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ 
+ <resources/>
+</ui> 

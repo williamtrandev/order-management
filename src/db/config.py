@@ -10,6 +10,7 @@ except:
 
 # Collections
 users = db['users']
+customers = db['customers']
 products = db['products']
 orders = db['orders']
 
@@ -89,4 +90,3 @@ def create_order(user_id, products, total_amount):
         )
     except Exception as e:
         print('db_error @create_order:', str(e))
-

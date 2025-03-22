@@ -7,8 +7,8 @@ app=QtWidgets.QApplication(sys.argv)
 class GlobalWidget:
     def __init__(self):
         self.widget = QtWidgets.QStackedWidget()
-        self.widget.setFixedWidth(800)
-        self.widget.setFixedHeight(600)
+        self.widget.setFixedWidth(1280)
+        self.widget.setFixedHeight(800)
 
     def get_widget(self):
         return self.widget

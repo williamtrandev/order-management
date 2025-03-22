@@ -8,41 +8,26 @@ class Dashboard(BaseWindow):
     def __init__(self):
         super(Dashboard, self).__init__("dashboard")
         
-        # Setup based on user role
-        self.user_role = context.get('role', 'customer')
+        # Setup welcome message
         self.welcome_label.setText(f"Chào mừng, {context.get('user', '')}")
         
-        if self.user_role == 'admin':
-            self.setupAdminView()
-        else:
-            self.setupCustomerView()
-            
-        # Connect signals
-        self.logout_btn.clicked.connect(self.logout)
+        # Setup buttons visibility and connections
+        self.setupButtons()
         self.setupNavigationSignals()
 
-    def setupAdminView(self):
-        """Show admin specific buttons and stats"""
-        self.admin_stats_btn.setVisible(True)
-        self.order_management_btn.setVisible(True)
-        self.my_orders_btn.setVisible(False)
-        self.favorite_products_btn.setVisible(False)
-
-    def setupCustomerView(self):
-        """Show customer specific elements"""
-        self.admin_stats_btn.setVisible(False)
-        self.order_management_btn.setVisible(False)
-        self.my_orders_btn.setVisible(True)
-        self.favorite_products_btn.setVisible(True)
+    def setupButtons(self):
+        """Setup button visibility"""
+        # Show all buttons
+        self.stats_btn.setVisible(True)
+        self.orders_btn.setVisible(True)
+        self.users_list_btn.setVisible(True)
 
     def setupNavigationSignals(self):
         """Connect navigation buttons to their respective views"""
-        if self.user_role == 'admin':
-            self.admin_stats_btn.clicked.connect(lambda: self.navigate_to_view('AdminStats'))
-            self.order_management_btn.clicked.connect(lambda: self.navigate_to_view('AdminOrders'))
-        else:
-            self.my_orders_btn.clicked.connect(lambda: self.navigate_to_view('CustomerOrders'))
-            self.favorite_products_btn.clicked.connect(lambda: self.navigate_to_view('FavoriteProducts'))
+        self.stats_btn.clicked.connect(lambda: self.navigate_to_view('AdminStats'))
+        self.orders_btn.clicked.connect(lambda: self.navigate_to_view('AdminOrders'))
+        self.users_list_btn.clicked.connect(self.show_customer_list)
+        self.logout_btn.clicked.connect(self.logout)
 
     def navigate_to_view(self, view_name):
         """Dynamic navigation to views"""
@@ -55,11 +40,20 @@ class Dashboard(BaseWindow):
             print(f"Navigation error to {view_name}: {str(e)}")
             self.show_error("Lỗi chuyển trang. Vui lòng thử lại.")
 
+    def show_customer_list(self):
+        """Handle customer list navigation"""
+        try:
+            from .customer_list import CustomerList
+            self.navigate_to(CustomerList)
+        except Exception as e:
+            print(f"Navigation error: {str(e)}")
+            self.show_error("Không thể chuyển trang. Vui lòng thử lại.")
+
     def logout(self):
         """Handle logout"""
         context['user'] = None
-        context['role'] = None
         context['user_id'] = None
+        
         from .login import Login
         self.navigate_to(Login)
 
