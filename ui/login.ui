@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Login</class>
+ <widget class="QMainWindow" name="Login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string>
+    QMainWindow {
+      background-color: #f0f2f5;
+    }
+    QLabel#title {
+      font-size: 24px;
+      color: #1a73e8;
+      margin: 20px;
+      font-weight: bold;
+    }
+    QLineEdit {
+      padding: 12px;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      font-size: 14px;
+      margin: 8px 60px;
+      background: white;
+    }
+    QLineEdit:focus {
+      border: 2px solid #1a73e8;
+    }
+    QPushButton {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 14px;
+      margin: 8px 60px;
+      font-weight: bold;
+    }
+    QPushButton:hover {
+      background-color: #1557b0;
+    }
+    QPushButton#createaccbutton {
+      background-color: #34a853;
+    }
+    QPushButton#createaccbutton:hover {
+      background-color: #2d8544;
+    }
+    QLabel#error_label {
+      color: #d93025;
+      font-size: 13px;
+      margin: 0px 60px;
+    }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <spacer name="verticalSpacer_top">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QLabel" name="title">
+      <property name="text">
+       <string>Hệ thống quản lý bán hàng</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="username">
+      <property name="placeholderText">
+       <string>Tên đăng nhập</string>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="password">
+      <property name="placeholderText">
+       <string>Mật khẩu</string>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="error_label">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="margin">
+       <number>10</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="loginbutton">
+      <property name="text">
+       <string>Đăng nhập</string>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="createaccbutton">
+      <property name="text">
+       <string>Tạo tài khoản mới</string>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_bottom">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+</ui>

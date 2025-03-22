@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminOrders</class>
+ <widget class="QMainWindow" name="AdminOrders">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="title">
+      <property name="text">
+       <string>Quản lý đơn hàng</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="orders_table">
+      <column>
+       <property name="text">
+        <string>Mã đơn</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Khách hàng</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tổng tiền</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Trạng thái</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngày tạo</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="refresh_btn">
+        <property name="text">
+         <string>Làm mới</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="back_btn">
+        <property name="text">
+         <string>Quay lại</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+</ui> 
