@@ -12,10 +12,10 @@ class BaseWindow(QtWidgets.QMainWindow):
             print(f"Error loading UI {ui_file}: {str(e)}")
             raise
 
-    def navigate_to(self, window_class):
+    def navigate_to(self, window_class, *args, **kwargs):
         """Safe navigation between windows"""
         try:
-            next_window = window_class()
+            next_window = window_class(*args, **kwargs)
             self.widget.addWidget(next_window)
             self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
         except Exception as e:

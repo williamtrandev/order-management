@@ -30,21 +30,25 @@ class CustomerList(BaseWindowWithSidebar):
         self.prev_page_btn.clicked.connect(lambda: self.changePage('prev'))
         self.next_page_btn.clicked.connect(lambda: self.changePage('next'))
         self.page_size_combo.currentIndexChanged.connect(self.onPageSizeChanged)
+        
+        # Connect double-click signal
+        self.customers_table.itemDoubleClicked.connect(self.onCustomerDoubleClicked)
 
     def setupTable(self):
         # Set table headers
-        self.customers_table.setColumnCount(6)
-        headers = ["Họ và tên", "Email", "Số điện thoại",
+        self.customers_table.setColumnCount(7)
+        headers = ["ID", "Họ và tên", "Email", "Số điện thoại",
                   "Địa chỉ", "Ngày tạo", "Tổng chi tiêu"]
         self.customers_table.setHorizontalHeaderLabels(headers)
         
         # Set column widths
-        self.customers_table.setColumnWidth(0, 200)  # Username
-        self.customers_table.setColumnWidth(1, 250)  # Email
-        self.customers_table.setColumnWidth(2, 150)  # Phone
-        self.customers_table.setColumnWidth(3, 300)  # Address
-        self.customers_table.setColumnWidth(4, 150)  # Created date
-        self.customers_table.setColumnWidth(5, 180)  # Total spent
+        self.customers_table.setColumnWidth(0, 100)  # ID
+        self.customers_table.setColumnWidth(1, 200)  # Username
+        self.customers_table.setColumnWidth(2, 250)  # Email
+        self.customers_table.setColumnWidth(3, 150)  # Phone
+        self.customers_table.setColumnWidth(4, 300)  # Address
+        self.customers_table.setColumnWidth(5, 150)  # Created date
+        self.customers_table.setColumnWidth(6, 180)  # Total spent
 
         # Make table read-only
         self.customers_table.setEditTriggers(QtWidgets.QTableWidget.EditTrigger.NoEditTriggers)
@@ -149,6 +153,7 @@ class CustomerList(BaseWindowWithSidebar):
                 
                 # Prepare items with alignment
                 items = [
+                    (user.get('customer_id', ''), QtCore.Qt.AlignmentFlag.AlignCenter),
                     (user.get('name', ''), QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter),
                     (user.get('email', ''), QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter),
                     (user.get('phone', ''), QtCore.Qt.AlignmentFlag.AlignCenter),
@@ -179,6 +184,15 @@ class CustomerList(BaseWindowWithSidebar):
         except Exception as e:
             print("Error loading users:", str(e))
             self.show_error("Không thể tải danh sách người dùng")
+
+    def onCustomerDoubleClicked(self, item):
+        # Lấy customer_id từ cột đầu tiên
+        row = item.row()
+        customer_id = self.customers_table.item(row, 0).text()
+        
+        # Mở trang chi tiết
+        from .customer_detail import CustomerDetail
+        self.navigate_to(CustomerDetail, customer_id=customer_id)
 
     def onSearchChanged(self):
         """Debounced search"""

@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="PyQt6-Inventory-Manager" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="PyQt6-Inventory-Manager" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9 (order-management)" project-jdk-type="Python SDK" />
 </project>

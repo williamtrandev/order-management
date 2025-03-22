@@ -112,4 +112,15 @@ class BaseWindowWithSidebar(BaseWindow):
         context['user_id'] = None
         
         from .login import Login
-        self.navigate_to(Login) 
+        self.navigate_to(Login)
+
+    def navigate_to(self, window_class, *args, **kwargs):
+        """Safe navigation between windows"""
+        try:
+            next_window = window_class(*args, **kwargs)
+            from src.widget import widget
+            widget.addWidget(next_window)
+            widget.setCurrentIndex(widget.currentIndex() + 1)
+        except Exception as e:
+            print(f"Navigation error to {window_class.__name__}: {str(e)}")
+            self.show_error("Lỗi chuyển trang. Vui lòng thử lại.") 

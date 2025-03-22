@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from datetime import datetime
+from bson import ObjectId
 
 try:
     client = MongoClient('mongodb://localhost:27017/')
@@ -90,3 +91,66 @@ def create_order(user_id, products, total_amount):
         )
     except Exception as e:
         print('db_error @create_order:', str(e))
+
+def get_customer_info(customer_id):
+    try:
+        # Convert customer_id to integer
+        customer_id = int(customer_id)
+        
+        # Find customer by customer_id
+        customer = customers.find_one({'customer_id': customer_id})
+        if customer:
+            # Calculate total spent from orders
+            total_spent = 0
+            orders_list = orders.find({'customer_id': customer_id})
+            for order in orders_list:
+                total_spent += order.get('total_price', 0)
+            
+            return {
+                'id': str(customer['_id']),
+                'name': customer.get('name', ''),
+                'email': customer.get('email', ''),
+                'phone': customer.get('phone', ''),
+                'address': customer.get('address', ''),
+                'created_at': customer.get('created_at', datetime.now()),
+                'total_spent': total_spent
+            }
+        return None
+    except Exception as e:
+        print('db_error @get_customer_info:', str(e))
+        return None
+
+def get_customer_orders(customer_id, page=1, page_size=20):
+    try:
+        # Convert customer_id to integer
+        customer_id = int(customer_id)
+        
+        # Get total count for pagination
+        total_count = orders.count_documents({'customer_id': customer_id})
+        
+        # Calculate skip for pagination
+        skip = (page - 1) * page_size
+        
+        # Get orders with pagination
+        orders_list = orders.find({'customer_id': customer_id}) \
+            .sort('created_at', -1) \
+            .skip(skip) \
+            .limit(page_size)
+            
+        # Format orders
+        formatted_orders = []
+        for order in orders_list:
+            formatted_orders.append({
+                'id': str(order['_id']),
+                'created_at': order.get('created_at', datetime.now()),
+                'total_price': order.get('total_price', 0),
+                'note': order.get('note', '')
+            })
+            
+        return {
+            'orders': formatted_orders,
+            'total_count': total_count
+        }
+    except Exception as e:
+        print('db_error @get_customer_orders:', str(e))
+        return {'orders': [], 'total_count': 0}
