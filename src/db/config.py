@@ -154,3 +154,49 @@ def get_customer_orders(customer_id, page=1, page_size=20):
     except Exception as e:
         print('db_error @get_customer_orders:', str(e))
         return {'orders': [], 'total_count': 0}
+
+def get_order_info(order_id):
+    try:
+        # Find order by order_id
+        order = orders.find_one({'order_id': order_id})
+        if order:
+            # Get customer info
+            customer = customers.find_one({'customer_id': order.get('customer_id')})
+            customer_name = customer.get('name', '') if customer else ''
+            
+            return {
+                'id': str(order.get('order_id')),
+                'customer_name': customer_name,
+                'created_at': order.get('created_at', datetime.now()),
+                'status': order.get('status', ''),
+                'total_price': order.get('total_price', 0),
+                'note': order.get('note', '')
+            }
+        return None
+    except Exception as e:
+        print('db_error @get_order_info:', str(e))
+        return None
+
+def get_order_items(order_id):
+    try:
+        # Find order by order_id
+        order = orders.find_one({'order_id': order_id})
+        if not order:
+            return []
+            
+        # Get order items
+        items = []
+        for item in order.get('items', []):
+            # Get product info
+            product = products.find_one({'product_id': item.get('product_id')})
+            if product:
+                items.append({
+                    'product_id': str(product.get('product_id')),
+                    'product_name': product.get('name', ''),
+                    'quantity': item.get('quantity', 0),
+                    'unit_price': item.get('unit_price', 0)
+                })
+        return items
+    except Exception as e:
+        print('db_error @get_order_items:', str(e))
+        return []
