@@ -158,7 +158,7 @@ def get_customer_orders(customer_id, page=1, page_size=20):
 def get_order_info(order_id):
     try:
         # Find order by order_id
-        order = orders.find_one({'order_id': order_id})
+        order = orders.find_one({'order_id': int(order_id)})
         if order:
             # Get customer info
             customer = customers.find_one({'customer_id': order.get('customer_id')})
@@ -180,13 +180,13 @@ def get_order_info(order_id):
 def get_order_items(order_id):
     try:
         # Find order by order_id
-        order = orders.find_one({'order_id': order_id})
+        order = orders.find_one({'order_id': int(order_id)})
         if not order:
             return []
             
         # Get order items
         items = []
-        for item in order.get('items', []):
+        for item in order.get('products', []):
             # Get product info
             product = products.find_one({'product_id': item.get('product_id')})
             if product:
@@ -194,7 +194,7 @@ def get_order_items(order_id):
                     'product_id': str(product.get('product_id')),
                     'product_name': product.get('name', ''),
                     'quantity': item.get('quantity', 0),
-                    'unit_price': item.get('unit_price', 0)
+                    'unit_price': item.get('price', 0)
                 })
         return items
     except Exception as e:

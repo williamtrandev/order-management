@@ -12,7 +12,7 @@
   </property>
   <property name="styleSheet">
    <string>
-    QMainWindow {
+    QWidget#Dashboard {
       background-color: #f0f2f5;
     }
     QLabel#title {
@@ -20,59 +20,61 @@
       color: #1a73e8;
       padding: 20px;
       font-weight: bold;
-      background: white;
-      border-bottom: 1px solid #dadce0;
+      background-color: transparent;
     }
     QWidget#stat_card {
-      background: white;
-      border: 1px solid #dadce0;
-      border-radius: 8px;
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
       padding: 15px;
+      margin: 10px;
     }
     QLabel#stat_value {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
       color: #1a73e8;
+      background-color: transparent;
     }
     QLabel#stat_title {
-      font-size: 16px;
+      font-size: 14px;
       color: #5f6368;
+      background-color: transparent;
+    }
+    QLabel#stat_icon {
+      font-size: 24px;
+      background-color: transparent;
     }
     QLabel#section_title {
       font-size: 20px;
       font-weight: bold;
       color: #202124;
       margin-top: 10px;
+      background-color: transparent;
     }
     QWidget#chart_container {
-      background: white;
-      border: 1px solid #dadce0;
-      border-radius: 8px;
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
       padding: 15px;
     }
     QComboBox {
-      padding: 11px;
+      padding: 8px;
       border: 1px solid #dadce0;
-      border-radius: 6px;
+      border-radius: 5px;
       font-size: 14px;
-      background: #f8f9fa;
-      min-width: 150px;
-    }
-    QComboBox:hover {
-      background: white;
-      border: 1px solid #1a73e8;
+      background-color: white;
+      min-width: 120px;
     }
     QPushButton {
       background-color: #1a73e8;
       color: white;
       border: none;
-      border-radius: 6px;
-      padding: 12px 24px;
+      border-radius: 5px;
+      padding: 8px 16px;
       font-size: 14px;
-      font-weight: bold;
     }
-    QPushButton:hover {
-      background-color: #1557b0;
+    QLabel {
+      background-color: transparent;
     }
    </string>
   </property>
@@ -82,15 +84,6 @@
     <layout class="QHBoxLayout" name="header_layout">
      <item>
       <widget class="QLabel" name="title">
-       <property name="styleSheet">
-        <string>
-         QLabel {
-           font-size: 24px;
-           color: #1a2035;
-           font-weight: bold;
-         }
-        </string>
-       </property>
        <property name="text">
         <string>Tổng quan hệ thống</string>
        </property>
@@ -145,7 +138,32 @@
         <string>stat_card</string>
        </property>
        <layout class="QVBoxLayout" name="revenue_layout">
-        <item>
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>15</number>
+        </property>
+        <property name="topMargin">
+         <number>15</number>
+        </property>
+        <property name="rightMargin">
+         <number>15</number>
+        </property>
+        <property name="bottomMargin">
+         <number>15</number>
+        </property>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="revenue_icon">
+          <property name="objectName">
+           <string>stat_icon</string>
+          </property>
+          <property name="text">
+           <string>💰</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="revenue_title">
           <property name="objectName">
            <string>stat_title</string>
@@ -155,7 +173,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="revenue_value">
           <property name="objectName">
            <string>stat_value</string>
@@ -176,7 +194,32 @@
         <string>stat_card</string>
        </property>
        <layout class="QVBoxLayout" name="customers_layout">
-        <item>
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>15</number>
+        </property>
+        <property name="topMargin">
+         <number>15</number>
+        </property>
+        <property name="rightMargin">
+         <number>15</number>
+        </property>
+        <property name="bottomMargin">
+         <number>15</number>
+        </property>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="customers_icon">
+          <property name="objectName">
+           <string>stat_icon</string>
+          </property>
+          <property name="text">
+           <string>👥</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="customers_title">
           <property name="objectName">
            <string>stat_title</string>
@@ -186,7 +229,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="customers_value">
           <property name="objectName">
            <string>stat_value</string>
@@ -207,7 +250,32 @@
         <string>stat_card</string>
        </property>
        <layout class="QVBoxLayout" name="orders_layout">
-        <item>
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>15</number>
+        </property>
+        <property name="topMargin">
+         <number>15</number>
+        </property>
+        <property name="rightMargin">
+         <number>15</number>
+        </property>
+        <property name="bottomMargin">
+         <number>15</number>
+        </property>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="orders_icon">
+          <property name="objectName">
+           <string>stat_icon</string>
+          </property>
+          <property name="text">
+           <string>📦</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="orders_title">
           <property name="objectName">
            <string>stat_title</string>
@@ -217,7 +285,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="orders_value">
           <property name="objectName">
            <string>stat_value</string>
@@ -238,7 +306,32 @@
         <string>stat_card</string>
        </property>
        <layout class="QVBoxLayout" name="avg_order_layout">
-        <item>
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>15</number>
+        </property>
+        <property name="topMargin">
+         <number>15</number>
+        </property>
+        <property name="rightMargin">
+         <number>15</number>
+        </property>
+        <property name="bottomMargin">
+         <number>15</number>
+        </property>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="avg_order_icon">
+          <property name="objectName">
+           <string>stat_icon</string>
+          </property>
+          <property name="text">
+           <string>📊</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="avg_order_title">
           <property name="objectName">
            <string>stat_title</string>
@@ -248,7 +341,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="avg_order_value">
           <property name="objectName">
            <string>stat_value</string>
