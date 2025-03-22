@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BaseWithSidebar</class>
+ <widget class="QMainWindow" name="BaseWithSidebar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string>
+    QMainWindow {
+      background-color: #f0f2f5;
+    }
+    
+    QWidget#sidebar {
+      background-color: #1a2035;
+      min-width: 260px;
+      max-width: 260px;
+    }
+    
+    QLabel#logo {
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      padding: 12px;
+      background-color: #1a2035;
+      border-bottom: 1px solid #2d3446;
+    }
+    
+    QListWidget#sidebar_list {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      padding: 10px 0;
+    }
+    
+    QListWidget#sidebar_list::item {
+      padding: 16px 24px;
+      margin: 4px 12px;
+      border-radius: 8px;
+      color: #a0aec0;
+      font-size: 14px;
+    }
+    
+    QListWidget#sidebar_list::item:selected {
+      background-color: #2d3446;
+      color: white;
+      font-weight: bold;
+    }
+    
+    QListWidget#sidebar_list::item:hover:!selected {
+      background-color: #252d3d;
+      color: white;
+    }
+    
+    QWidget#user_info {
+      background-color: #252d3d;
+      border-top: 1px solid #2d3446;
+      padding: 16px;
+    }
+    
+    QLabel#user_name {
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    QLabel#user_role {
+      color: #a0aec0;
+      font-size: 12px;
+    }
+    
+    QPushButton#logout_btn {
+      background-color: transparent;
+      color: #a0aec0;
+      border: 1px solid #a0aec0;
+      border-radius: 6px;
+      padding: 8px 16px;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    
+    QPushButton#logout_btn:hover {
+      background-color: #dc3545;
+      color: white;
+      border-color: #dc3545;
+    }
+    
+    QWidget#content {
+      background-color: transparent;
+      padding: 24px;
+    }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    
+    <!-- Sidebar -->
+    <item>
+     <widget class="QWidget" name="sidebar">
+      <layout class="QVBoxLayout" name="sidebar_layout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="logo">
+         <property name="text">
+          <string>Shopping Behavior App</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="sidebar_list"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QWidget" name="user_info">
+         <layout class="QVBoxLayout" name="user_info_layout">
+          <item>
+           <widget class="QLabel" name="user_name">
+            <property name="text">
+             <string>John Doe</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="user_role">
+            <property name="text">
+             <string>Administrator</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="logout_btn">
+            <property name="text">
+             <string>Đăng xuất</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>icons/logout.png</normaloff>
+             </iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    
+    <!-- Content Area -->
+    <item>
+     <widget class="QWidget" name="content">
+      <layout class="QVBoxLayout" name="content_layout"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+</ui> 

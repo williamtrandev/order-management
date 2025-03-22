@@ -1,9 +1,9 @@
 from PyQt6 import QtWidgets, QtCore
 from datetime import datetime
-from .base_window import BaseWindow
+from .base_window_with_sidebar import BaseWindowWithSidebar
 from src.db import config
 
-class CustomerList(BaseWindow):
+class CustomerList(BaseWindowWithSidebar):
     def __init__(self):
         super(CustomerList, self).__init__("customer_list")
         
@@ -25,13 +25,10 @@ class CustomerList(BaseWindow):
         self.search_by_combo.currentIndexChanged.connect(self.onSearchChanged)
         self.sort_order_combo.currentIndexChanged.connect(self.loadCustomers)
         self.refresh_btn.clicked.connect(self.loadCustomers)
-        self.back_btn.clicked.connect(self.goBack)
         
         # Pagination signals
-        self.first_page_btn.clicked.connect(lambda: self.changePage('first'))
         self.prev_page_btn.clicked.connect(lambda: self.changePage('prev'))
         self.next_page_btn.clicked.connect(lambda: self.changePage('next'))
-        self.last_page_btn.clicked.connect(lambda: self.changePage('last'))
         self.page_size_combo.currentIndexChanged.connect(self.onPageSizeChanged)
 
     def setupTable(self):
@@ -84,22 +81,16 @@ class CustomerList(BaseWindow):
         self.page_label.setText(f"Trang {self.current_page}/{total_pages}")
         
         # Update button states
-        self.first_page_btn.setEnabled(self.current_page > 1)
         self.prev_page_btn.setEnabled(self.current_page > 1)
         self.next_page_btn.setEnabled(self.current_page < total_pages)
-        self.last_page_btn.setEnabled(self.current_page < total_pages)
 
     def changePage(self, action):
         total_pages = (self.total_items + self.page_size - 1) // self.page_size
         
-        if action == 'first':
-            self.current_page = 1
-        elif action == 'prev':
+        if action == 'prev':
             self.current_page = max(1, self.current_page - 1)
         elif action == 'next':
             self.current_page = min(total_pages, self.current_page + 1)
-        elif action == 'last':
-            self.current_page = total_pages
         
         self.loadCustomers()
 
