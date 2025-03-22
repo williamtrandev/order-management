@@ -150,9 +150,9 @@ class CustomerList(BaseWindowWithSidebar):
                 
                 # Calculate total spent from orders
                 total_spent = 0
-                orders = config.db.orders.find({'user_id': str(user['_id'])})
+                orders = config.db.orders.find({'customer_id': user['customer_id']})
                 for order in orders:
-                    total_spent += order.get('total_amount', 0)
+                    total_spent += order.get('total_price', 0)
                 
                 # Prepare items with alignment
                 items = [

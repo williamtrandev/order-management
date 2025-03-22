@@ -34,7 +34,7 @@ class BaseWindowWithSidebar(BaseWindow):
             {
                 'icon': 'icons/dashboard.png',
                 'text': 'Tổng quan',
-                'view': 'DashboardStats'
+                'view': 'Dashboard'
             },
             {
                 'icon': 'icons/users.png',
@@ -84,9 +84,9 @@ class BaseWindowWithSidebar(BaseWindow):
             if view_name == self.__class__.__name__:
                 return  # Already on this view
                 
-            if view_name == 'DashboardStats':
-                from .dashboard_stats import DashboardStats
-                self.navigate_to(DashboardStats)
+            if view_name == 'Dashboard':
+                from .dashboard import Dashboard
+                self.navigate_to(Dashboard)
             elif view_name == 'CustomerList':
                 from .customer_list import CustomerList
                 self.navigate_to(CustomerList)

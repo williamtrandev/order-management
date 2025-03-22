@@ -1,56 +1,297 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Dashboard</class>
- <widget class="QMainWindow" name="Dashboard">
+ <widget class="QWidget" name="Dashboard">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1280</width>
+    <height>800</height>
    </rect>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="welcome_label">
-      <property name="text">
-       <string>Chào mừng</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="stats_btn">
-      <property name="text">
-       <string>Thống kê</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="orders_btn">
-      <property name="text">
-       <string>Quản lý đơn hàng</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="users_list_btn">
-      <property name="text">
-       <string>Danh sách người dùng</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="logout_btn">
-      <property name="text">
-       <string>Đăng xuất</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
+  <property name="styleSheet">
+   <string>
+    QMainWindow {
+      background-color: #f0f2f5;
+    }
+    QLabel#title {
+      font-size: 28px;
+      color: #1a73e8;
+      padding: 20px;
+      font-weight: bold;
+      background: white;
+      border-bottom: 1px solid #dadce0;
+    }
+    QWidget#stat_card {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    QLabel#stat_value {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1a73e8;
+    }
+    QLabel#stat_title {
+      font-size: 16px;
+      color: #5f6368;
+    }
+    QLabel#section_title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #202124;
+      margin-top: 10px;
+    }
+    QWidget#chart_container {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    QComboBox {
+      padding: 11px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #f8f9fa;
+      min-width: 150px;
+    }
+    QComboBox:hover {
+      background: white;
+      border: 1px solid #1a73e8;
+    }
+    QPushButton {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    QPushButton:hover {
+      background-color: #1557b0;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="content_layout">
+   <!-- Header -->
+   <item>
+    <layout class="QHBoxLayout" name="header_layout">
+     <item>
+      <widget class="QLabel" name="title">
+       <property name="styleSheet">
+        <string>
+         QLabel {
+           font-size: 24px;
+           color: #1a2035;
+           font-weight: bold;
+         }
+        </string>
+       </property>
+       <property name="text">
+        <string>Tổng quan hệ thống</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   
+   <!-- Filter by Year -->
+   <item>
+    <layout class="QHBoxLayout" name="filter_layout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="year_label">
+       <property name="text">
+        <string>Năm:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="year_combo"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="refresh_btn">
+       <property name="text">
+        <string>Làm mới</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   
+   <!-- Stats Cards -->
+   <item>
+    <layout class="QHBoxLayout" name="stats_layout">
+     <!-- Total Revenue -->
+     <item>
+      <widget class="QWidget" name="revenue_card" native="true">
+       <property name="objectName">
+        <string>stat_card</string>
+       </property>
+       <layout class="QVBoxLayout" name="revenue_layout">
+        <item>
+         <widget class="QLabel" name="revenue_title">
+          <property name="objectName">
+           <string>stat_title</string>
+          </property>
+          <property name="text">
+           <string>Tổng doanh thu</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="revenue_value">
+          <property name="objectName">
+           <string>stat_value</string>
+          </property>
+          <property name="text">
+           <string>0 VNĐ</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     
+     <!-- Total Customers -->
+     <item>
+      <widget class="QWidget" name="customers_card" native="true">
+       <property name="objectName">
+        <string>stat_card</string>
+       </property>
+       <layout class="QVBoxLayout" name="customers_layout">
+        <item>
+         <widget class="QLabel" name="customers_title">
+          <property name="objectName">
+           <string>stat_title</string>
+          </property>
+          <property name="text">
+           <string>Tổng khách hàng</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="customers_value">
+          <property name="objectName">
+           <string>stat_value</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     
+     <!-- Total Orders -->
+     <item>
+      <widget class="QWidget" name="orders_card" native="true">
+       <property name="objectName">
+        <string>stat_card</string>
+       </property>
+       <layout class="QVBoxLayout" name="orders_layout">
+        <item>
+         <widget class="QLabel" name="orders_title">
+          <property name="objectName">
+           <string>stat_title</string>
+          </property>
+          <property name="text">
+           <string>Tổng đơn hàng</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="orders_value">
+          <property name="objectName">
+           <string>stat_value</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     
+     <!-- Average Order Value -->
+     <item>
+      <widget class="QWidget" name="avg_order_card" native="true">
+       <property name="objectName">
+        <string>stat_card</string>
+       </property>
+       <layout class="QVBoxLayout" name="avg_order_layout">
+        <item>
+         <widget class="QLabel" name="avg_order_title">
+          <property name="objectName">
+           <string>stat_title</string>
+          </property>
+          <property name="text">
+           <string>Giá trị đơn trung bình</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="avg_order_value">
+          <property name="objectName">
+           <string>stat_value</string>
+          </property>
+          <property name="text">
+           <string>0 VNĐ</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   
+   <!-- Age Distribution Chart Section -->
+   <item>
+    <layout class="QVBoxLayout" name="age_chart_layout">
+     <item>
+      <widget class="QLabel" name="age_chart_title">
+       <property name="objectName">
+        <string>section_title</string>
+       </property>
+       <property name="text">
+        <string>Phân bố độ tuổi khách hàng</string>
+       </property>
+      </widget>
+     </item>
+     
+     <item>
+      <widget class="QWidget" name="chart_container" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>400</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="chart_layout"/>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
+ <resources/>
 </ui>
