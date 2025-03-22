@@ -50,6 +50,9 @@ class CustomerList(BaseWindowWithSidebar):
         self.customers_table.setColumnWidth(5, 150)  # Created date
         self.customers_table.setColumnWidth(6, 180)  # Total spent
 
+        # Hide ID column
+        self.customers_table.setColumnHidden(0, True)
+
         # Make table read-only
         self.customers_table.setEditTriggers(QtWidgets.QTableWidget.EditTrigger.NoEditTriggers)
         

@@ -46,11 +46,6 @@ class BaseWindowWithSidebar(BaseWindow):
                 'text': 'Đơn hàng',
                 'view': 'OrderList'
             },
-            {
-                'icon': 'icons/products.png',
-                'text': 'Sản phẩm',
-                'view': 'ProductList'
-            }
         ]
         
         for item in menu_items:
@@ -98,9 +93,6 @@ class BaseWindowWithSidebar(BaseWindow):
             elif view_name == 'OrderList':
                 from .order_list import OrderList
                 self.navigate_to(OrderList)
-            elif view_name == 'ProductList':
-                from .product_list import ProductList
-                self.navigate_to(ProductList)
                 
         except Exception as e:
             print(f"Navigation error: {str(e)}")
