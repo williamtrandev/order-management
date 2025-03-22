@@ -141,10 +141,10 @@ def get_customer_orders(customer_id, page=1, page_size=20):
         formatted_orders = []
         for order in orders_list:
             formatted_orders.append({
-                'id': str(order['_id']),
+                'id': str(order.get('order_id')),
                 'created_at': order.get('created_at', datetime.now()),
                 'total_price': order.get('total_price', 0),
-                'note': order.get('note', '')
+                'status': order.get('status', ''),
             })
             
         return {

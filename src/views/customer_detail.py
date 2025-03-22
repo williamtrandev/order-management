@@ -34,9 +34,9 @@ class CustomerDetail(BaseWindowWithSidebar):
 
     def setupTable(self):
         # Set table headers
-        self.orders_table.setColumnCount(5)
+        self.orders_table.setColumnCount(4)
         headers = ["Mã đơn hàng", "Ngày đặt", "Tổng tiền",
-                  "Trạng thái", "Ghi chú"]
+                  "Trạng thái"]
         self.orders_table.setHorizontalHeaderLabels(headers)
         
         # Set column widths
@@ -44,7 +44,6 @@ class CustomerDetail(BaseWindowWithSidebar):
         self.orders_table.setColumnWidth(1, 150)  # Order date
         self.orders_table.setColumnWidth(2, 150)  # Total amount
         self.orders_table.setColumnWidth(3, 100)  # Status
-        self.orders_table.setColumnWidth(4, 200)  # Note
 
         # Make table read-only
         self.orders_table.setEditTriggers(QtWidgets.QTableWidget.EditTrigger.NoEditTriggers)
@@ -147,13 +146,21 @@ class CustomerDetail(BaseWindowWithSidebar):
                 
                 # Format date
                 date_str = order['created_at'].strftime("%d/%m/%Y %H:%M")
+
+                # Get status text
+                status_text = {
+                    'pending': 'Chờ xử lý',
+                    'processing': 'Đang xử lý',
+                    'completed': 'Hoàn thành',
+                    'cancelled': 'Đã hủy'
+                }.get(order['status'], order['status'])
                 
                 # Prepare items with alignment
                 items = [
                     (order['id'], QtCore.Qt.AlignmentFlag.AlignCenter),
                     (date_str, QtCore.Qt.AlignmentFlag.AlignCenter),
                     (f"{order['total_price']:,.0f} VNĐ", QtCore.Qt.AlignmentFlag.AlignRight | QtCore.Qt.AlignmentFlag.AlignVCenter),
-                    (order['note'], QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
+                    (status_text, QtCore.Qt.AlignmentFlag.AlignCenter)
                 ]
                 
                 # Set table items with alignment
